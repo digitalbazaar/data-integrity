@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2022 Digital Bazaar, Inc. All rights reserved.
  */
+// eslint-disable-next-line unicorn/prefer-module
 module.exports = function(config) {
 
   config.set({
