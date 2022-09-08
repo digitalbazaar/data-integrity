@@ -2,7 +2,7 @@
 
 [![Build status](https://img.shields.io/github/workflow/status/digitalbazaar/data-integrity/Node.js%20CI)](https://github.com/digitalbazaar/data-integrity/actions?query=workflow%3A%22Node.js+CI%22)
 [![Coverage status](https://img.shields.io/codecov/c/github/digitalbazaar/data-integrity)](https://codecov.io/gh/digitalbazaar/data-integrity)
-[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/data-integrity.svg)](https://npm.im/digitalbazaar/data-integrity)
+[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/data-integrity.svg)](https://npm.im/@digitalbazaar/data-integrity)
 
 > DataIntegrity library for use with cryptosuites and jsonld-signatures.
 
