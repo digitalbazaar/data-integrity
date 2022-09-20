@@ -1,6 +1,6 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 1.1.0 - 2022-09-xx
+## 1.1.0 - 2022-09-20
 
 ### Changed
 - Assertion method validation is to be handled by cryptosuites that
