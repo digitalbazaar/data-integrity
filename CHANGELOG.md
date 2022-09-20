@@ -2,7 +2,7 @@
 
 ## 1.1.0 - 2022-09-20
 
-### Changed
+### Added
 - Assertion method validation is to be handled by cryptosuites that
   are responsible for creating verifier interfaces. This assertion
   work was being duplicated in this library but it must already be
