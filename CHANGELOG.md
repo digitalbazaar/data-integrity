@@ -3,7 +3,8 @@
 ## 1.2.0 - 2023-TBD
 
 ### Added
-- Override `matchProof()` in `LinkedDataProof` to check cryptosuite value.
+- Add `matchProof()` to override the one in `LinkedDataProof` to check
+  cryptosuite value.
 
 ## 1.1.0 - 2022-09-20
 
