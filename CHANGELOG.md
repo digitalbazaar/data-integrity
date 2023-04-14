@@ -1,6 +1,6 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 1.2.0 - 2023-TBD
+## 1.2.0 - 2023-04-14
 
 ### Added
 - Add `matchProof()` to override the one in `LinkedDataProof` to check
