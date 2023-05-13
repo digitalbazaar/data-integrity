@@ -1,6 +1,6 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 1.3.0 - 2023-05-dd
+## 1.3.0 - 2023-05-13
 
 ### Added
 - Add support for `derive` function to be implemented by the given
