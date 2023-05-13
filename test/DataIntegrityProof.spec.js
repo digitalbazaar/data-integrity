@@ -102,23 +102,16 @@ describe('DataIntegrityProof', () => {
           'kue8HgagkTEtNXNkojGGiZU48cR9');
     });
 
-    it('should sign with "createVerifyData" + "createProofValue"', async () => {
+    it('should sign with custom "createProofValue"', async () => {
       const unsignedCredential = {...credential};
       const customCryptosuite = {
         ...eddsa2022CryptoSuite,
-        async createVerifyData({
-          document, proof, proofSet, documentLoader, dataIntegrityProof
-        }) {
-          // use default
-          return dataIntegrityProof.createVerifyData(
-            {document, proof, proofSet, documentLoader});
-        },
         async createProofValue({
           verifyData, document, proof, proofSet, documentLoader,
           dataIntegrityProof
         }) {
           // use default
-          proof = dataIntegrityProof.sign(
+          proof = await dataIntegrityProof.sign(
             {verifyData, document, proof, proofSet, documentLoader});
           return proof.proofValue;
         }
@@ -141,16 +134,23 @@ describe('DataIntegrityProof', () => {
           'kue8HgagkTEtNXNkojGGiZU48cR9');
     });
 
-    it('should sign with custom "createProofValue"', async () => {
+    it('should sign with "createVerifyData" + "createProofValue"', async () => {
       const unsignedCredential = {...credential};
       const customCryptosuite = {
         ...eddsa2022CryptoSuite,
+        async createVerifyData({
+          document, proof, proofSet, documentLoader, dataIntegrityProof
+        }) {
+          // use default
+          return dataIntegrityProof.createVerifyData(
+            {document, proof, proofSet, documentLoader});
+        },
         async createProofValue({
           verifyData, document, proof, proofSet, documentLoader,
           dataIntegrityProof
         }) {
           // use default
-          proof = dataIntegrityProof.sign(
+          proof = await dataIntegrityProof.sign(
             {verifyData, document, proof, proofSet, documentLoader});
           return proof.proofValue;
         }
