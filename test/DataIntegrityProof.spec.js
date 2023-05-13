@@ -370,6 +370,42 @@ describe('DataIntegrityProof', () => {
     });
   });
 
+  describe('derive() using multikey key type', () => {
+    it('should create a proof with "derive"', async () => {
+      const unsignedCredential = {...credential};
+      const customCryptosuite = {
+        ...eddsa2022CryptoSuite,
+        async derive({
+          document, purpose, proofSet, documentLoader, dataIntegrityProof
+        }) {
+          // use default
+          const proof = await dataIntegrityProof.createProof(
+            {document, purpose, proofSet, documentLoader});
+          return {
+            ...document,
+            proof
+          };
+        }
+      };
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: customCryptosuite
+      });
+
+      const signedCredential = await jsigs.derive(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential).to.have.property('proof');
+      expect(signedCredential.proof.proofValue).to
+        .equal('z3mUohG26PXywKkpw9v3Eacceo6kEDL44ps37hgYLj434kJhfigbqUATJJJbM' +
+          'kue8HgagkTEtNXNkojGGiZU48cR9');
+    });
+  });
+
   describe('verify() using multikey key type', () => {
     let signedCredential;
 
