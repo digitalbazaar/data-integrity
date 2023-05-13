@@ -373,6 +373,8 @@ describe('DataIntegrityProof', () => {
   describe('derive() using multikey key type', () => {
     it('should create a proof with "derive"', async () => {
       const unsignedCredential = {...credential};
+      // add `proof` that should not exist in derived output
+      unsignedCredential.proof = [{type: 'urn:fake1'}];
       const customCryptosuite = {
         ...eddsa2022CryptoSuite,
         async derive({
