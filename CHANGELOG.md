@@ -11,7 +11,16 @@
   the cryptosuite's function will be called passing the `cryptosuite` instance
   (that was given to the `DataIntegrityProof` constructor) and the
   `dataIntegrityProof` instance along with the usual parameters for that
-  function.
+  function. The resulting verify data may be either a `Uint8Array` or an
+  `object` that will be understood by a compatible `signer`, `verifier`, or
+  `createProofValue` custom function.
+- Enable `cryptosuite` to provide custom `createProofValue`. If provided,
+  the cryptosuite's function will be called passing the `cryptosuite` instance
+  (that was given to the `DataIntegrityProof` constructor) and the
+  `dataIntegrityProof` instance along with the created `verifyData`, `document`,
+  `proof`, `proofSet`, and `documentLoader`. The `verifyData` will be either a
+  `Uint8Array` or an `object` based on the default `createVerifyData` function
+  or a custom one if the cryptosuite also provides it.
 
 ## 1.2.0 - 2023-04-14
 

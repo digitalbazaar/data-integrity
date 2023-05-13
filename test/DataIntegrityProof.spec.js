@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2021-2023 Digital Bazaar, Inc. All rights reserved.
  */
 import {expect} from 'chai';
 
@@ -310,7 +310,7 @@ describe('DataIntegrityProof', () => {
         expect(result.verified).to.be.false;
         expect(errors[0].name).to.equal('Error');
         expect(errors[0].message).to.equal(
-          'Only base58btc multibase encoding is supported.'
+          'Only base58btc or base64url multibase encoding is supported.'
         );
       });
 
