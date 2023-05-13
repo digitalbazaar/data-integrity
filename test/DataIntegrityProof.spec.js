@@ -81,7 +81,7 @@ describe('DataIntegrityProof', () => {
         }) {
           // use default
           return dataIntegrityProof.createVerifyData(
-            {document, proof, proofSet, documentLoader})
+            {document, proof, proofSet, documentLoader});
         }
       };
 
@@ -111,7 +111,7 @@ describe('DataIntegrityProof', () => {
         }) {
           // use default
           return dataIntegrityProof.createVerifyData(
-            {document, proof, proofSet, documentLoader})
+            {document, proof, proofSet, documentLoader});
         },
         async createProofValue({
           verifyData, document, proof, proofSet, documentLoader,
