@@ -72,6 +72,107 @@ describe('DataIntegrityProof', () => {
           'kue8HgagkTEtNXNkojGGiZU48cR9');
     });
 
+    it('should sign with custom "createVerifyData"', async () => {
+      const unsignedCredential = {...credential};
+      const customCryptosuite = {
+        ...eddsa2022CryptoSuite,
+        async createVerifyData({
+          document, proof, proofSet, documentLoader, dataIntegrityProof
+        }) {
+          // use default
+          return dataIntegrityProof.createVerifyData(
+            {document, proof, proofSet, documentLoader})
+        }
+      };
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: customCryptosuite
+      });
+
+      const signedCredential = await jsigs.sign(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential).to.have.property('proof');
+      expect(signedCredential.proof.proofValue).to
+        .equal('z3mUohG26PXywKkpw9v3Eacceo6kEDL44ps37hgYLj434kJhfigbqUATJJJbM' +
+          'kue8HgagkTEtNXNkojGGiZU48cR9');
+    });
+
+    it('should sign with "createVerifyData" + "createProofValue"', async () => {
+      const unsignedCredential = {...credential};
+      const customCryptosuite = {
+        ...eddsa2022CryptoSuite,
+        async createVerifyData({
+          document, proof, proofSet, documentLoader, dataIntegrityProof
+        }) {
+          // use default
+          return dataIntegrityProof.createVerifyData(
+            {document, proof, proofSet, documentLoader})
+        },
+        async createProofValue({
+          verifyData, document, proof, proofSet, documentLoader,
+          dataIntegrityProof
+        }) {
+          // use default
+          proof = dataIntegrityProof.sign(
+            {verifyData, document, proof, proofSet, documentLoader});
+          return proof.proofValue;
+        }
+      };
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: customCryptosuite
+      });
+
+      const signedCredential = await jsigs.sign(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential).to.have.property('proof');
+      expect(signedCredential.proof.proofValue).to
+        .equal('z3mUohG26PXywKkpw9v3Eacceo6kEDL44ps37hgYLj434kJhfigbqUATJJJbM' +
+          'kue8HgagkTEtNXNkojGGiZU48cR9');
+    });
+
+    it('should sign with custom "createProofValue"', async () => {
+      const unsignedCredential = {...credential};
+      const customCryptosuite = {
+        ...eddsa2022CryptoSuite,
+        async createProofValue({
+          verifyData, document, proof, proofSet, documentLoader,
+          dataIntegrityProof
+        }) {
+          // use default
+          proof = dataIntegrityProof.sign(
+            {verifyData, document, proof, proofSet, documentLoader});
+          return proof.proofValue;
+        }
+      };
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: customCryptosuite
+      });
+
+      const signedCredential = await jsigs.sign(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential).to.have.property('proof');
+      expect(signedCredential.proof.proofValue).to
+        .equal('z3mUohG26PXywKkpw9v3Eacceo6kEDL44ps37hgYLj434kJhfigbqUATJJJbM' +
+          'kue8HgagkTEtNXNkojGGiZU48cR9');
+    });
+
     it('should fail to sign with undefined term', async () => {
       const unsignedCredential = JSON.parse(JSON.stringify(credential));
       unsignedCredential.undefinedTerm = 'foo';
@@ -118,6 +219,64 @@ describe('DataIntegrityProof', () => {
       }
       expect(error).to.exist;
       expect(error.name).to.equal('jsonld.ValidationError');
+    });
+
+    it('should fail to sign with custom "createVerifyData"', async () => {
+      const unsignedCredential = JSON.parse(JSON.stringify(credential));
+      const brokenCryptosuite = {
+        ...eddsa2022CryptoSuite,
+        async createVerifyData() {
+          throw new Error('Invalid createVerifyData');
+        }
+      };
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: brokenCryptosuite
+      });
+
+      let error;
+      try {
+        await jsigs.sign(unsignedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+      } catch(e) {
+        error = e;
+      }
+      expect(error).to.exist;
+      expect(error.message).to.equal('Invalid createVerifyData');
+    });
+
+    it('should fail to sign with custom "createProofValue"', async () => {
+      const unsignedCredential = JSON.parse(JSON.stringify(credential));
+      const brokenCryptosuite = {
+        ...eddsa2022CryptoSuite,
+        async createProofValue() {
+          throw new Error('Invalid createProofValue');
+        }
+      };
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: brokenCryptosuite
+      });
+
+      let error;
+      try {
+        await jsigs.sign(unsignedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+      } catch(e) {
+        error = e;
+      }
+      expect(error).to.exist;
+      expect(error.message).to.equal('Invalid createProofValue');
     });
 
     it('should throw error if "signer" is not specified', async () => {
