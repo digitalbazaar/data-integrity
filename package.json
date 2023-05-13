@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "base58-universal": "^2.0.0",
+    "base64url-universal": "^2.0.0",
     "jsonld-signatures": "^11.0.0"
   },
   "devDependencies": {
