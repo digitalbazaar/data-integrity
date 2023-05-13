@@ -1,5 +1,18 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 1.3.0 - 2023-05-dd
+
+### Added
+- Add support for `derive` function to be implemented by the given
+  `cryptosuite`. The `derive` function is used to derive a new document with
+  a new `proof` based on an existing `document` (and `proof`). The `derive`
+  function will be used when calling `derive` from `jsonld-signatures`.
+- Enable `cryptosuite` to provide custom `createVerifyData`. If provided,
+  the cryptosuite's function will be called passing the `cryptosuite` instance
+  (that was given to the `DataIntegrityProof` constructor) and the
+  `dataIntegrityProof` instance along with the usual parameters for that
+  function.
+
 ## 1.2.0 - 2023-04-14
 
 ### Added
