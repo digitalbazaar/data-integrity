@@ -1,5 +1,10 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 1.3.1 - 2023-05-dd
+
+### Fixed
+- Ensure custom `createVerifyData` is called in `verifyProof`.
+
 ## 1.3.0 - 2023-05-13
 
 ### Added
