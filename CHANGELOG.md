@@ -1,6 +1,6 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 1.4.0 - 2023-05-dd
+## 1.4.0 - 2023-05-21
 
 ### Added
 - Allow the VCDM 2.0 context to be used as an alternative to the
