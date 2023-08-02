@@ -1,5 +1,10 @@
 # @digitalbazaar/data-integrity Changelog
 
+## Unreleased
+
+### Fixed
+- Change json-ld context fallback in `canonizeProof` to the document's `@context`, adding the suite context only if necessary. This ensures that the canonicalized proof is identical in both issuance and verification.
+
 ## 1.4.0 - 2023-05-21
 
 ### Added
