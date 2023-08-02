@@ -1,6 +1,6 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 1.4.1 - 2023-08-dd
+## 1.4.1 - 2023-08-02
 
 ### Fixed
 - Change JSON-LD context fallback in `canonizeProof` to the document's
