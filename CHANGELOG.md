@@ -1,5 +1,11 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 1.5.0 - 2023-11-TBD
+
+### Changed
+- Refactor algorithm check to accommodate `requiredAlgorithm` represented as
+  array.
+
 ## 1.4.1 - 2023-08-02
 
 ### Fixed
