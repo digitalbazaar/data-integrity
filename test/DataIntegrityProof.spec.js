@@ -42,6 +42,7 @@ describe('DataIntegrityProof', () => {
       } catch(e) {
         error = e;
       }
+
       const errorMessage = `The signer's algorithm "${signer.algorithm}" ` +
         `does not match the required algorithm for the cryptosuite ` +
         `"${eddsa2022CryptoSuite.requiredAlgorithm}".`;
