@@ -5,6 +5,7 @@
 ### Changed
 - **BREAKING**: Update `DATA_INTEGRITY_CONTEXT` to
   `https://w3id.org/security/data-integrity/v2`.
+- **BREAKING**: Drop support for Node.js < 18.
 
 ## 1.5.0 - 2023-11-06
 
