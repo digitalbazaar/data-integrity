@@ -1,5 +1,11 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 2.0.0 - 2023-11-TBD
+
+### Changed
+- **BREAKING**: Update `DATA_INTEGRITY_CONTEXT` to
+  `https://w3id.org/security/data-integrity/v2`.
+
 ## 1.5.0 - 2023-11-06
 
 ### Changed
