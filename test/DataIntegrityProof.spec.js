@@ -9,6 +9,7 @@ const {purposes: {AssertionProofPurpose}} = jsigs;
 import * as Ed25519Multikey from '@digitalbazaar/ed25519-multikey';
 import {
   credential,
+  credentialWithLegacyContext,
   ed25519MultikeyKeyPair
 } from './mock-data.js';
 import {DataIntegrityProof} from '../lib/index.js';
@@ -70,6 +71,27 @@ describe('DataIntegrityProof', () => {
       expect(signedCredential.proof.proofValue).to
         .equal('z4uwHCobmxKqQfZb7i8QRnNR9J4TR6u4Wkm4DB3ms337gfSpL4UwhTD7KKdPj' +
           'yAaVJQ4y896FEnB1Vz3uEz14jWoC');
+    });
+
+    it('should sign a document with legacy context', async () => {
+      const unsignedCredential = {...credentialWithLegacyContext};
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite,
+        legacyContext: true
+      });
+
+      const signedCredential = await jsigs.sign(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential).to.have.property('proof');
+      expect(signedCredential.proof.proofValue).to
+        .equal('z3NFmA9iPvumYi1khNwAvWP6Cbfd1mftXnCcV8H9Hzuakoff3VYYzk5WAobn' +
+          '3CkPMr7HNZcmUrJzkkD31mLQMK1uK');
     });
 
     it('should sign with custom "createVerifyData"', async () => {

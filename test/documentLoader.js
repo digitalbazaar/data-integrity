@@ -27,6 +27,12 @@ loader.addStatic(
 );
 
 loader.addStatic(
+  dataIntegrityContext.constants.DATA_INTEGRITY_CONTEXT_V1_URL,
+  dataIntegrityContext.contexts.get(
+    dataIntegrityContext.constants.DATA_INTEGRITY_CONTEXT_V1_URL)
+);
+
+loader.addStatic(
   multikeyContext.constants.CONTEXT_URL,
   multikeyContext.contexts.get(multikeyContext.constants.CONTEXT_URL)
 );
