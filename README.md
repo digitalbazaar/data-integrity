@@ -150,6 +150,10 @@ const signedCredential = await jsigs.sign(unsignedCredential, {
 }
 ```
 
+Note: If you wish to utilize the legacy data integrity context (
+https://w3id.org/security/data-integrity/v1), you can set the `legacyContext`
+flag to true.
+
 ## Contribute
 
 See [the contribute file](https://github.com/digitalbazaar/bedrock/blob/master/CONTRIBUTING.md)!
