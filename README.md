@@ -150,9 +150,10 @@ const signedCredential = await jsigs.sign(unsignedCredential, {
 }
 ```
 
-Note: If you wish to utilize the legacy data integrity context (
-https://w3id.org/security/data-integrity/v1), you can set the `legacyContext`
-flag to true.
+Note: To create or verify proofs using legacy draft data integrity suites, you
+must pass `legacyContext: true` when creating a `DataIntegrityProof` instance;
+this will cause the appropriate legacy data integrity context (
+https://w3id.org/security/data-integrity/v1) to be used.
 
 ## Contribute
 
