@@ -1,6 +1,6 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 2.0.0 - 2023-11-TBD
+## 2.0.0 - 2023-11-13
 
 ### Added
 - Add `legacyContext` flag to allow use of legacy context
