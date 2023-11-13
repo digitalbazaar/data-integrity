@@ -143,9 +143,9 @@ const signedCredential = await jsigs.sign(unsignedCredential, {
     "type": "DataIntegrityProof",
     "created": "2022-09-06T21:29:24Z",
     "verificationMethod": "https://example.edu/issuers/565049#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT",
-    "cryptosuite": "eddsa-rdfc-2022",
+    "cryptosuite": "eddsa-2022",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z4uwHCobmxKqQfZb7i8QRnNR9J4TR6u4Wkm4DB3ms337gfSpL4UwhTD7KKdPjyAaVJQ4y896FEnB1Vz3uEz14jWoC"
+    "proofValue": "zakT6XP6P7ZVAGJKjvnVi1YjC96RufyeasEEMkDQrCkvMnG3QeAqBuoVoWAWkEEd5w8FATEigPA5788ByuwnCZrd"
   }
 }
 ```
