@@ -14,8 +14,8 @@ import {
 } from './mock-data.js';
 import {DataIntegrityProof} from '../lib/index.js';
 import {
-  cryptosuite as eddsaRdfc2022CryptoSuite
-} from '@digitalbazaar/eddsa-rdfc-2022-cryptosuite';
+  cryptosuite as eddsa2022CryptoSuite
+} from '@digitalbazaar/eddsa-2022-cryptosuite';
 
 import {loader} from './documentLoader.js';
 
@@ -38,7 +38,7 @@ describe('DataIntegrityProof', () => {
       let error;
       try {
         new DataIntegrityProof({
-          signer, date, cryptosuite: eddsaRdfc2022CryptoSuite
+          signer, date, cryptosuite: eddsa2022CryptoSuite
         });
       } catch(e) {
         error = e;
@@ -46,7 +46,7 @@ describe('DataIntegrityProof', () => {
 
       const errorMessage = `The signer's algorithm "${signer.algorithm}" ` +
         `does not match the required algorithm for the cryptosuite ` +
-        `"${eddsaRdfc2022CryptoSuite.requiredAlgorithm}".`;
+        `"${eddsa2022CryptoSuite.requiredAlgorithm}".`;
       expect(error).to.exist;
       expect(error.message).to.equal(errorMessage);
     });
@@ -59,7 +59,7 @@ describe('DataIntegrityProof', () => {
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
       });
 
       const signedCredential = await jsigs.sign(unsignedCredential, {
@@ -69,8 +69,8 @@ describe('DataIntegrityProof', () => {
       });
       expect(signedCredential).to.have.property('proof');
       expect(signedCredential.proof.proofValue).to
-        .equal('z4uwHCobmxKqQfZb7i8QRnNR9J4TR6u4Wkm4DB3ms337gfSpL4UwhTD7KKdPj' +
-          'yAaVJQ4y896FEnB1Vz3uEz14jWoC');
+        .equal('zakT6XP6P7ZVAGJKjvnVi1YjC96RufyeasEEMkDQrCkvMnG3QeAqBuoVoWAWk' +
+          'EEd5w8FATEigPA5788ByuwnCZrd');
     });
 
     it('should sign a document with legacy context', async () => {
@@ -79,7 +79,7 @@ describe('DataIntegrityProof', () => {
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite,
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite,
         legacyContext: true
       });
 
@@ -90,14 +90,14 @@ describe('DataIntegrityProof', () => {
       });
       expect(signedCredential).to.have.property('proof');
       expect(signedCredential.proof.proofValue).to
-        .equal('z3NFmA9iPvumYi1khNwAvWP6Cbfd1mftXnCcV8H9Hzuakoff3VYYzk5WAobn' +
-          '3CkPMr7HNZcmUrJzkkD31mLQMK1uK');
+        .equal('z3mUohG26PXywKkpw9v3Eacceo6kEDL44ps37hgYLj434kJhfigbqUATJJJb' +
+          'Mkue8HgagkTEtNXNkojGGiZU48cR9');
     });
 
     it('should sign with custom "createVerifyData"', async () => {
       const unsignedCredential = {...credential};
       const customCryptosuite = {
-        ...eddsaRdfc2022CryptoSuite,
+        ...eddsa2022CryptoSuite,
         async createVerifyData({
           document, proof, proofSet, documentLoader, dataIntegrityProof
         }) {
@@ -120,14 +120,14 @@ describe('DataIntegrityProof', () => {
       });
       expect(signedCredential).to.have.property('proof');
       expect(signedCredential.proof.proofValue).to
-        .equal('z4uwHCobmxKqQfZb7i8QRnNR9J4TR6u4Wkm4DB3ms337gfSpL4UwhTD7KKdPj' +
-          'yAaVJQ4y896FEnB1Vz3uEz14jWoC');
+        .equal('zakT6XP6P7ZVAGJKjvnVi1YjC96RufyeasEEMkDQrCkvMnG3QeAqBuoVoWAWk' +
+          'EEd5w8FATEigPA5788ByuwnCZrd');
     });
 
     it('should sign with custom "createProofValue"', async () => {
       const unsignedCredential = {...credential};
       const customCryptosuite = {
-        ...eddsaRdfc2022CryptoSuite,
+        ...eddsa2022CryptoSuite,
         async createProofValue({
           verifyData, document, proof, proofSet, documentLoader,
           dataIntegrityProof
@@ -152,14 +152,14 @@ describe('DataIntegrityProof', () => {
       });
       expect(signedCredential).to.have.property('proof');
       expect(signedCredential.proof.proofValue).to
-        .equal('z4uwHCobmxKqQfZb7i8QRnNR9J4TR6u4Wkm4DB3ms337gfSpL4UwhTD7KKdPj' +
-          'yAaVJQ4y896FEnB1Vz3uEz14jWoC');
+        .equal('zakT6XP6P7ZVAGJKjvnVi1YjC96RufyeasEEMkDQrCkvMnG3QeAqBuoVoWAWk' +
+          'EEd5w8FATEigPA5788ByuwnCZrd');
     });
 
     it('should sign with "createVerifyData" + "createProofValue"', async () => {
       const unsignedCredential = {...credential};
       const customCryptosuite = {
-        ...eddsaRdfc2022CryptoSuite,
+        ...eddsa2022CryptoSuite,
         async createVerifyData({
           document, proof, proofSet, documentLoader, dataIntegrityProof
         }) {
@@ -191,8 +191,8 @@ describe('DataIntegrityProof', () => {
       });
       expect(signedCredential).to.have.property('proof');
       expect(signedCredential.proof.proofValue).to
-        .equal('z4uwHCobmxKqQfZb7i8QRnNR9J4TR6u4Wkm4DB3ms337gfSpL4UwhTD7KKdPj' +
-          'yAaVJQ4y896FEnB1Vz3uEz14jWoC');
+        .equal('zakT6XP6P7ZVAGJKjvnVi1YjC96RufyeasEEMkDQrCkvMnG3QeAqBuoVoWAWk' +
+          'EEd5w8FATEigPA5788ByuwnCZrd');
     });
 
     it('should fail to sign with undefined term', async () => {
@@ -202,7 +202,7 @@ describe('DataIntegrityProof', () => {
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
       });
 
       let error;
@@ -226,7 +226,7 @@ describe('DataIntegrityProof', () => {
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
       });
 
       let error;
@@ -246,7 +246,7 @@ describe('DataIntegrityProof', () => {
     it('should fail to sign with custom "createVerifyData"', async () => {
       const unsignedCredential = JSON.parse(JSON.stringify(credential));
       const brokenCryptosuite = {
-        ...eddsaRdfc2022CryptoSuite,
+        ...eddsa2022CryptoSuite,
         async createVerifyData() {
           throw new Error('Invalid createVerifyData');
         }
@@ -275,7 +275,7 @@ describe('DataIntegrityProof', () => {
     it('should fail to sign with custom "createProofValue"', async () => {
       const unsignedCredential = JSON.parse(JSON.stringify(credential));
       const brokenCryptosuite = {
-        ...eddsaRdfc2022CryptoSuite,
+        ...eddsa2022CryptoSuite,
         async createProofValue() {
           throw new Error('Invalid createProofValue');
         }
@@ -307,7 +307,7 @@ describe('DataIntegrityProof', () => {
       //  no keypair, no signer object given
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        date, cryptosuite: eddsaRdfc2022CryptoSuite
+        date, cryptosuite: eddsa2022CryptoSuite
       });
 
       let err;
@@ -339,7 +339,7 @@ describe('DataIntegrityProof', () => {
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
       });
 
       const signedCredential = await jsigs.sign(unsignedCredential, {
@@ -372,7 +372,7 @@ describe('DataIntegrityProof', () => {
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
       });
 
       let err;
@@ -398,7 +398,7 @@ describe('DataIntegrityProof', () => {
       // add `proof` that should not exist in derived output
       unsignedCredential.proof = [{type: 'urn:fake1'}];
       const customCryptosuite = {
-        ...eddsaRdfc2022CryptoSuite,
+        ...eddsa2022CryptoSuite,
         async derive({
           document, purpose, proofSet, documentLoader, dataIntegrityProof
         }) {
@@ -425,8 +425,8 @@ describe('DataIntegrityProof', () => {
       });
       expect(signedCredential).to.have.property('proof');
       expect(signedCredential.proof.proofValue).to
-        .equal('z4uwHCobmxKqQfZb7i8QRnNR9J4TR6u4Wkm4DB3ms337gfSpL4UwhTD7KKdPj' +
-          'yAaVJQ4y896FEnB1Vz3uEz14jWoC');
+        .equal('zakT6XP6P7ZVAGJKjvnVi1YjC96RufyeasEEMkDQrCkvMnG3QeAqBuoVoWAWk' +
+          'EEd5w8FATEigPA5788ByuwnCZrd');
     });
   });
 
@@ -439,7 +439,7 @@ describe('DataIntegrityProof', () => {
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
       const date = '2022-09-06T21:29:24Z';
       const suite = new DataIntegrityProof({
-        signer: keyPair.signer(), date, cryptosuite: eddsaRdfc2022CryptoSuite
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
       });
 
       signedCredential = await jsigs.sign(unsignedCredential, {
@@ -451,7 +451,7 @@ describe('DataIntegrityProof', () => {
 
     it('should verify a document', async () => {
       const suite = new DataIntegrityProof({
-        cryptosuite: eddsaRdfc2022CryptoSuite
+        cryptosuite: eddsa2022CryptoSuite
       });
       const result = await jsigs.verify(signedCredential, {
         suite,
@@ -464,7 +464,7 @@ describe('DataIntegrityProof', () => {
     it('should fail verification if "proofValue" is not string',
       async () => {
         const suite = new DataIntegrityProof({
-          cryptosuite: eddsaRdfc2022CryptoSuite
+          cryptosuite: eddsa2022CryptoSuite
         });
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
@@ -488,7 +488,7 @@ describe('DataIntegrityProof', () => {
     it('should fail verification if "proofValue" is not given',
       async () => {
         const suite = new DataIntegrityProof({
-          cryptosuite: eddsaRdfc2022CryptoSuite
+          cryptosuite: eddsa2022CryptoSuite
         });
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
@@ -513,7 +513,7 @@ describe('DataIntegrityProof', () => {
     it('should fail verification if proofValue string does not start with "z"',
       async () => {
         const suite = new DataIntegrityProof({
-          cryptosuite: eddsaRdfc2022CryptoSuite
+          cryptosuite: eddsa2022CryptoSuite
         });
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
@@ -538,7 +538,7 @@ describe('DataIntegrityProof', () => {
     it('should fail verification if proof type is not DataIntegrityProof',
       async () => {
         const suite = new DataIntegrityProof({
-          cryptosuite: eddsaRdfc2022CryptoSuite
+          cryptosuite: eddsa2022CryptoSuite
         });
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
