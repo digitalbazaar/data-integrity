@@ -2,14 +2,14 @@
 
 ## 2.0.0 - 2023-11-TBD
 
+### Added
+- Add `legacyContext` flag to allow use of legacy context
+  `https://w3id.org/security/data-integrity/v1`.
+
 ### Changed
 - **BREAKING**: Update default `this.contextUrl` to point to
   `https://w3id.org/security/data-integrity/v2`.
 - **BREAKING**: Drop support for Node.js < 18.
-
-### Added
-- Add `legacyContext` flag to allow use of legacy context
-  `https://w3id.org/security/data-integrity/v1`.
 
 ## 1.5.0 - 2023-11-06
 
