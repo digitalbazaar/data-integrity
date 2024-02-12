@@ -195,6 +195,57 @@ describe('DataIntegrityProof', () => {
           'EEd5w8FATEigPA5788ByuwnCZrd');
     });
 
+    it('passing date:null should remove created from proof', async () => {
+      const unsignedCredential = {...credential};
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = null;
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
+      });
+
+      const signedCredential = await jsigs.sign(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential).to.have.property('proof');
+      expect(signedCredential.proof.created).to.not.exist;
+    });
+
+    it('created should exist with passed date', async () => {
+      const unsignedCredential = {...credential};
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const date = '2022-09-06T21:29:24Z';
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), date, cryptosuite: eddsa2022CryptoSuite
+      });
+
+      const signedCredential = await jsigs.sign(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential.proof.created).to.exist;
+    });
+
+    it('created should exist with date not passed', async () => {
+      const unsignedCredential = {...credential};
+
+      const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+      const suite = new DataIntegrityProof({
+        signer: keyPair.signer(), cryptosuite: eddsa2022CryptoSuite
+      });
+
+      const signedCredential = await jsigs.sign(unsignedCredential, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        documentLoader
+      });
+      expect(signedCredential.proof.created).to.exist;
+    });
+
     it('should fail to sign with undefined term', async () => {
       const unsignedCredential = JSON.parse(JSON.stringify(credential));
       unsignedCredential.undefinedTerm = 'foo';
