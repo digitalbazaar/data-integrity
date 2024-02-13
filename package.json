@@ -1,6 +1,6 @@
 {
   "name": "@digitalbazaar/data-integrity",
-  "version": "2.1.0",
+  "version": "2.1.1-0",
   "description": "Data Integrity Proof library for use with jsonld-signatures.",
   "homepage": "https://github.com/digitalbazaar/data-integrity",
   "repository": {
