@@ -1,5 +1,12 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 2.1.0 - 2024-02-13
+
+### Added
+- Add option to pass `date: null` to the `DataIntegrityProof`
+  constructor, resulting in a proof without the `proof.created`
+  property.
+
 ## 2.0.0 - 2023-11-13
 
 ### Added
