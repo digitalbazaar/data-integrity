@@ -4,8 +4,8 @@
 
 ### Added
 - Add option to pass `date: null` to the `DataIntegrityProof`
-  constructor, resulting in a proof without the `proof.created`
-  property.
+  constructor, preventing an auto-generated date from being
+  set as the value of the `proof.created` property.
 
 ## 2.0.0 - 2023-11-13
 
