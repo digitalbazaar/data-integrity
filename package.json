@@ -20,7 +20,7 @@
   "dependencies": {
     "base58-universal": "^2.0.0",
     "base64url-universal": "^2.0.0",
-    "jsonld-signatures": "^11.2.0"
+    "jsonld-signatures": "^11.3.0"
   },
   "devDependencies": {
     "@digitalbazaar/data-integrity-context": "^2.0.0",
