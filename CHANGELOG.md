@@ -1,9 +1,10 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 2.2.0 - 2024-08-dd
+## 2.2.0 - 2024-08-01
 
 ### Changed
 - Improve default canonize options (adding `safe: true` and `base: null`).
+- Use `jsonld-signatures@11.3`.
 
 ## 2.1.0 - 2024-02-13
 
