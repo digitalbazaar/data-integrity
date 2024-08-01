@@ -1,5 +1,10 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 2.2.0 - 2024-08-dd
+
+### Changed
+- Improve default canonize options (adding `safe: true` and `base: null`).
+
 ## 2.1.0 - 2024-02-13
 
 ### Added
