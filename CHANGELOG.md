@@ -1,5 +1,10 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 2.3.0 - 2024-08-dd
+
+### Changed
+- Ensure `verificationMethod` is passed to `createVerifyData`.
+
 ## 2.2.0 - 2024-08-01
 
 ### Changed
