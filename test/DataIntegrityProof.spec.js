@@ -607,5 +607,14 @@ describe('DataIntegrityProof', () => {
         expect(result.verified).to.be.false;
         expect(errors[0].name).to.equal('NotFoundError');
       });
+      it('should fail verification if created is not XMLSCHEMA11-2', async function() {
+
+      });
+      it('should fail verification if created is in the future', async function() {
+
+      });
+     it('should interpret created as UTC if incorrectly serialized', async function() {
+
+      });
   });
 });
