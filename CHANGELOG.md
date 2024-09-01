@@ -1,5 +1,10 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 2.4.0 -
+
+### Added
+- verify now checks `created` and `expires`.
+
 ## 2.3.0 - 2024-08-26
 
 ### Changed
