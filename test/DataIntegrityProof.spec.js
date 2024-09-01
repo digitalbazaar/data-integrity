@@ -605,11 +605,36 @@ describe('DataIntegrityProof', () => {
       });
     it('should fail verification if proof created is not XMLSCHEMA11-2',
       async function() {
-
+        const unsignedCredential = {...credential};
+        const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+        const suite = new DataIntegrityProof({
+          signer: keyPair.signer(), cryptosuite: eddsa2022CryptoSuite
+        });
+        suite.proof = {created: 'May-23-2022'};
+        const signedCredential = await jsigs.sign(unsignedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+        console.log(JSON.stringify({signedCredential}, null, 2));
       });
     it('should fail verification if proof created is in the future',
       async function() {
-
+        const unsignedCredential = {...credential};
+        const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+        const date = new Date();
+        date.setUTCFullYear(date.getUTCFullYear() + 2);
+        const suite = new DataIntegrityProof({
+          cryptosuite: eddsa2022CryptoSuite,
+          signer: keyPair.signer(),
+          date
+        });
+        const signedCredential = await jsigs.sign(unsignedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+        console.log(JSON.stringify({signedCredential}, null, 2));
       });
     it('should interpret proof created as UTC if incorrectly serialized',
       async function() {
