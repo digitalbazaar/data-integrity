@@ -247,7 +247,7 @@ describe('DataIntegrityProof', () => {
     });
 
     it('should fail to sign with undefined term', async () => {
-      const unsignedCredential = JSON.parse(JSON.stringify(credential));
+      const unsignedCredential = structuredClone(credential);
       unsignedCredential.undefinedTerm = 'foo';
 
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
@@ -271,7 +271,7 @@ describe('DataIntegrityProof', () => {
     });
 
     it('should fail to sign with relative type URL', async () => {
-      const unsignedCredential = JSON.parse(JSON.stringify(credential));
+      const unsignedCredential = structuredClone(credential);
       unsignedCredential.type.push('UndefinedType');
 
       const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
@@ -295,7 +295,7 @@ describe('DataIntegrityProof', () => {
     });
 
     it('should fail to sign with custom "createVerifyData"', async () => {
-      const unsignedCredential = JSON.parse(JSON.stringify(credential));
+      const unsignedCredential = structuredClone(credential);
       const brokenCryptosuite = {
         ...eddsa2022CryptoSuite,
         async createVerifyData() {
@@ -324,7 +324,7 @@ describe('DataIntegrityProof', () => {
     });
 
     it('should fail to sign with custom "createProofValue"', async () => {
-      const unsignedCredential = JSON.parse(JSON.stringify(credential));
+      const unsignedCredential = structuredClone(credential);
       const brokenCryptosuite = {
         ...eddsa2022CryptoSuite,
         async createProofValue() {
@@ -517,8 +517,7 @@ describe('DataIntegrityProof', () => {
         const suite = new DataIntegrityProof({
           cryptosuite: eddsa2022CryptoSuite
         });
-        const signedCredentialCopy =
-          JSON.parse(JSON.stringify(signedCredential));
+        const signedCredentialCopy = structuredClone(signedCredential);
         // intentionally modify proofValue type to not be string
         signedCredentialCopy.proof.proofValue = {};
 
@@ -541,8 +540,7 @@ describe('DataIntegrityProof', () => {
         const suite = new DataIntegrityProof({
           cryptosuite: eddsa2022CryptoSuite
         });
-        const signedCredentialCopy =
-          JSON.parse(JSON.stringify(signedCredential));
+        const signedCredentialCopy = structuredClone(signedCredential);
         // intentionally modify proofValue to be undefined
         signedCredentialCopy.proof.proofValue = undefined;
 
@@ -566,8 +564,7 @@ describe('DataIntegrityProof', () => {
         const suite = new DataIntegrityProof({
           cryptosuite: eddsa2022CryptoSuite
         });
-        const signedCredentialCopy =
-          JSON.parse(JSON.stringify(signedCredential));
+        const signedCredentialCopy = structuredClone(signedCredential);
         // intentionally modify proofValue to not start with 'z'
         signedCredentialCopy.proof.proofValue = 'a';
 
@@ -591,8 +588,7 @@ describe('DataIntegrityProof', () => {
         const suite = new DataIntegrityProof({
           cryptosuite: eddsa2022CryptoSuite
         });
-        const signedCredentialCopy =
-          JSON.parse(JSON.stringify(signedCredential));
+        const signedCredentialCopy = structuredClone(signedCredential);
         // intentionally modify proof type to be InvalidSignature2100
         signedCredentialCopy.proof.type = 'InvalidSignature2100';
 
