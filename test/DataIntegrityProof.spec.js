@@ -628,7 +628,7 @@ describe('DataIntegrityProof', () => {
       });
     it('should fail verification if proof created is in the future',
       async function() {
-        const unsignedCredential = {...credential};
+        const unsignedCredential = structuredClone(credential);
         const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
         const date = new Date();
         date.setUTCFullYear(date.getUTCFullYear() + 2);
@@ -642,7 +642,20 @@ describe('DataIntegrityProof', () => {
           purpose: new AssertionProofPurpose(),
           documentLoader
         });
-        console.log(JSON.stringify({signedCredential}, null, 2));
+        const result = await jsigs.verify(signedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+        should.exist(result, 'Expected verification results to exist.');
+        should.exist(
+          result.verified,
+          'Expected verification results to have property verified.'
+        );
+        result.verified.should.equal(
+          false,
+          'Expected credential with created in the future to not verify.'
+        );
       });
     it('should interpret proof created as UTC if incorrectly serialized',
       async function() {
