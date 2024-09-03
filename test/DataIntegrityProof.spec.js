@@ -708,7 +708,7 @@ describe('DataIntegrityProof', () => {
         );
         positiveResult.verified.should.equal(
           true,
-          'Expected created to be interprested as a UTC date in the past.'
+          'Expected created to be interpreted as a UTC date in the past.'
         );
       });
   });
