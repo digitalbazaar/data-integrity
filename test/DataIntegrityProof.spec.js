@@ -10,7 +10,8 @@ import * as Ed25519Multikey from '@digitalbazaar/ed25519-multikey';
 import {
   credential,
   credentialWithLegacyContext,
-  ed25519MultikeyKeyPair
+  ed25519MultikeyKeyPair,
+  signedCredentialWithInvalidCreated
 } from './mock-data.js';
 import {DataIntegrityProof} from '../lib/index.js';
 import {
@@ -605,18 +606,25 @@ describe('DataIntegrityProof', () => {
       });
     it('should fail verification if proof created is not XMLSCHEMA11-2',
       async function() {
-        const unsignedCredential = {...credential};
-        const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+        const signedCredentialCopy = structuredClone(
+          signedCredentialWithInvalidCreated);
         const suite = new DataIntegrityProof({
-          signer: keyPair.signer(), cryptosuite: eddsa2022CryptoSuite
+          cryptosuite: eddsa2022CryptoSuite
         });
-        suite.proof = {created: 'May-23-2022'};
-        const signedCredential = await jsigs.sign(unsignedCredential, {
+        const result = await jsigs.verify(signedCredentialCopy, {
           suite,
           purpose: new AssertionProofPurpose(),
           documentLoader
         });
-        console.log(JSON.stringify({signedCredential}, null, 2));
+        should.exist(result, 'Expected verification results to exist.');
+        should.exist(
+          result.verified,
+          'Expected verification results to have property verified.'
+        );
+        result.verified.should.equal(
+          false,
+          'Expected credential with non XMLSCHEMA11-2 created to not verify.'
+        );
       });
     it('should fail verification if proof created is in the future',
       async function() {
