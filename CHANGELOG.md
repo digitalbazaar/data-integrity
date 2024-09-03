@@ -3,7 +3,7 @@
 ## 2.4.0 -
 
 ### Added
-- verify now checks `created` and `expires`.
+- verify now checks `created`.
 
 ## 2.3.0 - 2024-08-26
 
