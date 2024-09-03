@@ -659,7 +659,35 @@ describe('DataIntegrityProof', () => {
       });
     it('should interpret proof created as UTC if incorrectly serialized',
       async function() {
-
+        const unsignedCredential = structuredClone(credential);
+        const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+        const date = new Date();
+        date.setUTCFullYear(date.getUTCFullYear() + 2);
+        const suite = new DataIntegrityProof({
+          cryptosuite: eddsa2022CryptoSuite,
+          signer: keyPair.signer(),
+        });
+        suite.proof = {created: date.toISOString().substr(0, 19)};
+        const signedCredential = await jsigs.sign(unsignedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+        const result = await jsigs.verify(signedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+        should.exist(result, 'Expected verification results to exist.');
+        should.exist(
+          result.verified,
+          'Expected verification results to have property verified.'
+        );
+        result.verified.should.equal(
+          false,
+          'Expected credential with created that should be interpreted as ' +
+           'in the future to not verify.'
+        );
       });
   });
 });
