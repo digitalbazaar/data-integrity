@@ -98,10 +98,12 @@ export const proofChainTests = {
       previousProof: 'urn:uuid:test:missing:proof',
       type: 'DataIntegrityProof',
       created: '2024-09-04T17:56:23Z',
-      verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
+      verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6' +
+        'SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
       cryptosuite: 'eddsa-2022',
       proofPurpose: 'assertionMethod',
-      proofValue: 'z2TgUCiDPt9DFyFuFN2vGq6Hi7dhnCnE8MVU6LJ6p69QvyLXfjiB9ut8g7A11omzrZxAZo8TeuyAtTJAcgzDmEkTL'
+      proofValue: 'z2TgUCiDPt9DFyFuFN2vGq6Hi7dhnCnE8MVU6LJ6p69QvyLXfjiB9ut' +
+        '8g7A11omzrZxAZo8TeuyAtTJAcgzDmEkTL'
     },
     proofSet: [
       {
@@ -132,10 +134,12 @@ export const proofChainTests = {
         id: 'urn:uuid:test:first:proof',
         type: 'DataIntegrityProof',
         created: '2024-09-04T17:56:23Z',
-        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
+        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmk' +
+          'Hc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
         cryptosuite: 'eddsa-2022',
         proofPurpose: 'assertionMethod',
-        proofValue: 'zYJwkeNWFRcrM6zHMrWZVa1U8ZUFDMQBA6osVMaYE7moKsauoLyZsqRFAWbdnhumHjwb3dbtcjw5Xs6bTPuT8XvU'
+        proofValue: 'zYJwkeNWFRcrM6zHMrWZVa1U8ZUFDMQBA6osVMaYE7moKsauoLyZsqR' +
+          'FAWbdnhumHjwb3dbtcjw5Xs6bTPuT8XvU'
       },
       {
         '@context': [
@@ -165,10 +169,12 @@ export const proofChainTests = {
         previousProof: 'urn:uuid:test:missing:proof',
         type: 'DataIntegrityProof',
         created: '2024-09-04T17:56:23Z',
-        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
+        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmk' +
+          'Hc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
         cryptosuite: 'eddsa-2022',
         proofPurpose: 'assertionMethod',
-        proofValue: 'z2TgUCiDPt9DFyFuFN2vGq6Hi7dhnCnE8MVU6LJ6p69QvyLXfjiB9ut8g7A11omzrZxAZo8TeuyAtTJAcgzDmEkTL'
+        proofValue: 'z2TgUCiDPt9DFyFuFN2vGq6Hi7dhnCnE8MVU6LJ6p69QvyLXfjiB9' +
+          'ut8g7A11omzrZxAZo8TeuyAtTJAcgzDmEkTL'
       }
     ],
     document: {
@@ -245,10 +251,12 @@ export const proofChainTests = {
       previousProof: 'urn:uuid:test:first:proof',
       type: 'DataIntegrityProof',
       created: '2024-09-04T17:56:23Z',
-      verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
+      verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkH' +
+        'c6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
       cryptosuite: 'eddsa-2022',
       proofPurpose: 'assertionMethod',
-      proofValue: 'z21G3JXgi1PcUazGXH1Vs4ugrioC3WcRQnZdn9QvP9kHL8mTXvPVaVczSM2EzwSTmz7iejiR6cXdrHDgxNSHJSHY8'
+      proofValue: 'z21G3JXgi1PcUazGXH1Vs4ugrioC3WcRQnZdn9QvP9kHL8mTXvPVaVczS' +
+        'M2EzwSTmz7iejiR6cXdrHDgxNSHJSHY8'
     },
     proofSet: [
       {
@@ -279,10 +287,12 @@ export const proofChainTests = {
         id: 'urn:uuid:test:first:proof',
         type: 'DataIntegrityProof',
         created: '2024-09-04T17:56:23Z',
-        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
+        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmk' +
+          'Hc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
         cryptosuite: 'eddsa-2022',
         proofPurpose: 'assertionMethod',
-        proofValue: 'zYJwkeNWFRcrM6zHMrWZVa1U8ZUFDMQBA6osVMaYE7moKsauoLyZsqRFAWbdnhumHjwb3dbtcjw5Xs6bTPuT8XvU'
+        proofValue: 'zYJwkeNWFRcrM6zHMrWZVa1U8ZUFDMQBA6osVMaYE7moKsauoLyZsq' +
+          'RFAWbdnhumHjwb3dbtcjw5Xs6bTPuT8XvU'
       },
       {
         '@context': [
@@ -312,10 +322,12 @@ export const proofChainTests = {
         previousProof: 'urn:uuid:test:first:proof',
         type: 'DataIntegrityProof',
         created: '2024-09-04T17:56:23Z',
-        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
+        verificationMethod: 'did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmk' +
+          'Hc6SaVWoT#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
         cryptosuite: 'eddsa-2022',
         proofPurpose: 'assertionMethod',
-        proofValue: 'z21G3JXgi1PcUazGXH1Vs4ugrioC3WcRQnZdn9QvP9kHL8mTXvPVaVczSM2EzwSTmz7iejiR6cXdrHDgxNSHJSHY8'
+        proofValue: 'z21G3JXgi1PcUazGXH1Vs4ugrioC3WcRQnZdn9QvP9kHL8mTXvPVaV' +
+          'czSM2EzwSTmz7iejiR6cXdrHDgxNSHJSHY8'
       }
     ],
     document: {
