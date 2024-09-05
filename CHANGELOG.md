@@ -1,5 +1,11 @@
 # @digitalbazaar/data-integrity Changelog
 
+## 2.5.0 -
+
+### Added
+- `verifyProof()` now checks that `expires`, if present, is properly
+  formatted.
+
 ## 2.4.0 - 2024-09-05
 
 ### Added
