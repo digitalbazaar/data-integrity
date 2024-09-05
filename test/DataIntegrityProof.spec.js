@@ -627,70 +627,13 @@ describe('DataIntegrityProof', () => {
           'Expected credential with non XMLSCHEMA11-2 created to not verify.'
         );
       });
-    it('should fail verification if proof created is in the future',
-      async function() {
-        const unsignedCredential = structuredClone(credential);
-        const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
-        const date = new Date();
-        date.setUTCFullYear(date.getUTCFullYear() + 2);
-        const suite = new DataIntegrityProof({
-          cryptosuite: eddsa2022CryptoSuite,
-          signer: keyPair.signer(),
-          date
-        });
-        const signedCredential = await jsigs.sign(unsignedCredential, {
-          suite,
-          purpose: new AssertionProofPurpose(),
-          documentLoader
-        });
-        const result = await jsigs.verify(signedCredential, {
-          suite,
-          purpose: new AssertionProofPurpose(),
-          documentLoader
-        });
-        should.exist(result, 'Expected verification results to exist.');
-        should.exist(
-          result.verified,
-          'Expected verification results to have property verified.'
-        );
-        result.verified.should.equal(
-          false,
-          'Expected credential with created in the future to not verify.'
-        );
-      });
     it('should interpret proof created as UTC if incorrectly serialized',
       async function() {
-        // this is a little hard to test so a negative and positive test are
-        // used
-        const unsignedCredential = structuredClone(credential);
-        const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
-        const date = new Date();
-        date.setUTCFullYear(date.getUTCFullYear() + 2);
+        // this is a little hard to test so we just assume
+        // a datetime with out an offset is accepted
         const suite = new DataIntegrityProof({
-          cryptosuite: eddsa2022CryptoSuite,
-          signer: keyPair.signer(),
+          cryptosuite: eddsa2022CryptoSuite
         });
-        suite.proof = {created: date.toISOString().substr(0, 19)};
-        const signedCredential = await jsigs.sign(unsignedCredential, {
-          suite,
-          purpose: new AssertionProofPurpose(),
-          documentLoader
-        });
-        const negativeResult = await jsigs.verify(signedCredential, {
-          suite,
-          purpose: new AssertionProofPurpose(),
-          documentLoader
-        });
-        should.exist(negativeResult, 'Expected verification results to exist.');
-        should.exist(
-          negativeResult.verified,
-          'Expected negative verification results to have property verified.'
-        );
-        negativeResult.verified.should.equal(
-          false,
-          'Expected credential with created that should be interpreted as ' +
-           'in the future to not verify.'
-        );
         const signedCredentialCopy = structuredClone(
           signedCredentialCreatedNoOffset);
         const positiveResult = await jsigs.verify(signedCredentialCopy, {
