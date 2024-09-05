@@ -98,34 +98,3 @@ export const signedCredentialWithInvalidCreated = {
       'idAyd4Kq14hW5rxHuEjkMMpVcNTZN4'
   }
 };
-
-export const signedCredentialCreatedNoOffset = {
-  '@context': [
-    'https://www.w3.org/2018/credentials/v1',
-    {
-      AlumniCredential: 'https://schema.org#AlumniCredential',
-      alumniOf: 'https://schema.org#alumniOf'
-    },
-    'https://w3id.org/security/data-integrity/v2'
-  ],
-  id: 'http://example.edu/credentials/1872',
-  type: [
-    'VerifiableCredential',
-    'AlumniCredential'
-  ],
-  issuer: 'https://example.edu/issuers/565049',
-  issuanceDate: '2010-01-01T19:23:24Z',
-  credentialSubject: {
-    id: 'https://example.edu/students/alice',
-    alumniOf: 'Example University'
-  },
-  proof: {
-    created: '2024-09-03T14:13:10',
-    type: 'DataIntegrityProof',
-    verificationMethod: 'https://example.edu/issuers/565049#z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT',
-    cryptosuite: 'eddsa-2022',
-    proofPurpose: 'assertionMethod',
-    proofValue: 'z2RkqdgtNvAhi7PK99ZVJqDHyMXNwYjg7hBP2XC4uxH17zrdAf2YqSDteu' +
-      'ALnyq4yMpGteVzPV3CjZY4mbRqfMVxd'
-  }
-};

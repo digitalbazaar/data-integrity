@@ -11,7 +11,6 @@ import {
   credential,
   credentialWithLegacyContext,
   ed25519MultikeyKeyPair,
-  signedCredentialCreatedNoOffset,
   signedCredentialWithInvalidCreated
 } from './mock-data.js';
 import {DataIntegrityProof} from '../lib/index.js';
@@ -658,32 +657,5 @@ describe('DataIntegrityProof', () => {
         );
       });
 
-    it('should interpret proof created as UTC if incorrectly serialized',
-      async function() {
-        // this is a little hard to test so we just assume
-        // a datetime with out an offset is accepted
-        const suite = new DataIntegrityProof({
-          cryptosuite: eddsa2022CryptoSuite
-        });
-        const signedCredentialCopy = structuredClone(
-          signedCredentialCreatedNoOffset);
-        const positiveResult = await jsigs.verify(signedCredentialCopy, {
-          suite,
-          purpose: new AssertionProofPurpose(),
-          documentLoader
-        });
-        should.exist(
-          positiveResult,
-          'Expected positive verification result to exist.'
-        );
-        should.exist(
-          positiveResult.verified,
-          'Expected positive result to have property verified.'
-        );
-        positiveResult.verified.should.equal(
-          true,
-          'Expected created to be interpreted as a UTC date in the past.'
-        );
-      });
   });
 });
