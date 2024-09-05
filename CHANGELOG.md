@@ -1,9 +1,10 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 2.4.0 -
+## 2.4.0 - 2024-09-05
 
 ### Added
-- `verify()` now checks that `created`, if present, is properly formatted.
+- `verifyProof()` now checks that `created`, if present, is properly
+  formatted.
 
 ## 2.3.0 - 2024-08-26
 
