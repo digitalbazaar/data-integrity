@@ -3,7 +3,7 @@
 ## 2.4.0 -
 
 ### Added
-- verify now checks `created`.
+- `verify()` now checks that `created`, if present, is properly formatted.
 
 ## 2.3.0 - 2024-08-26
 
