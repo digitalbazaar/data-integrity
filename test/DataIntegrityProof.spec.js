@@ -627,6 +627,37 @@ describe('DataIntegrityProof', () => {
           'Expected credential with non XMLSCHEMA11-2 created to not verify.'
         );
       });
+    it('should fail verification if proof expires is not XMLSCHEMA11-2',
+      async function() {
+        const unsignedCredential = structuredClone(credential);
+        const keyPair = await Ed25519Multikey.from({...ed25519MultikeyKeyPair});
+        const suite = new DataIntegrityProof({
+          signer: keyPair.signer(),
+          cryptosuite: eddsa2022CryptoSuite
+        });
+        const plus5Years = new Date().getFullYear() + 5;
+        suite.proof = {expires: `May-23-${plus5Years}`};
+        const signedCredential = await jsigs.sign(unsignedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+        const result = await jsigs.verify(signedCredential, {
+          suite: new DataIntegrityProof({cryptosuite: eddsa2022CryptoSuite}),
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+        should.exist(result, 'Expected verification results to exist.');
+        should.exist(
+          result.verified,
+          'Expected verification results to have property verified.'
+        );
+        result.verified.should.equal(
+          false,
+          'Expected credential with non XMLSCHEMA11-2 created to not verify.'
+        );
+      });
+
     it('should interpret proof created as UTC if incorrectly serialized',
       async function() {
         // this is a little hard to test so we just assume
