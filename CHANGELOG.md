@@ -1,6 +1,6 @@
 # @digitalbazaar/data-integrity Changelog
 
-## 2.5.0 -
+## 2.5.0 - 2024-09-06
 
 ### Added
 - `verifyProof()` now checks that `expires`, if present, is properly
